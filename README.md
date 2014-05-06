@@ -9,4 +9,4 @@ See META-INF/LICENSE.txt file
 
 Requirements
 ------------
-Module is targeted to be deployed to Digital Factory version 7.0.0.0 or later.
+Module is targeted to be deployed to Digital Factory version 7.0.1.0 or later.
