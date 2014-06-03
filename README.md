@@ -1,4 +1,4 @@
-CKEDitor
+CKEditor
 ==========================================
 
 This is a custom module for the Digital Factory platform that provides feature-rich WYSIWYG editor for content authoring.
