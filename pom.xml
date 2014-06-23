@@ -77,11 +77,11 @@
     <parent>
         <artifactId>jahia-modules</artifactId>
         <groupId>org.jahia.modules</groupId>
-        <version>7.0.0.1-SNAPSHOT</version>
+        <version>7.0.0.1</version>
     </parent>
     <artifactId>ckeditor</artifactId>
     <name>Jahia CKEditor</name>
-    <version>4.4.1-SNAPSHOT</version>
+    <version>4.4.1</version>
     <packaging>bundle</packaging>
     <description>CKEditor module for the Digital Factory platform that provides feature-rich WYSIWYG editor for content authoring.</description>
     <scm>
