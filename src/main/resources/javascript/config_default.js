@@ -10,7 +10,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.language = (typeof contextJsParameters != 'undefined') ? contextJsParameters.uilang : 'en';
 	config.contentlanguage = (typeof contextJsParameters != 'undefined') ? contextJsParameters.lang : 'en';
 	config.siteUuid = (typeof contextJsParameters != 'undefined') ? contextJsParameters.siteUuid : '';
-	config.customConfig = (typeof contextJsParameters != 'undefined') ? contextJsParameters.ckeCfg : '';
+	config.customConfig = (typeof contextJsParameters != 'undefined') ? ((typeof contextJsParameters.ckeCfg != 'undefined') ? contextJsParameters.ckeCfg : '') : '';
 
 	config.filebrowserWindowWidth = '810';
 	config.filebrowserWindowHeight = '650';
