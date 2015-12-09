@@ -83,7 +83,7 @@
     <name>Jahia CKEditor</name>
     <version>4.4.5-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    <description>CKEditor module for the Digital Factory platform that provides feature-rich WYSIWYG editor for content authoring.</description>
+    <description>CKEditor module for the Digital Experience Manager platform that provides feature-rich WYSIWYG editor for content authoring.</description>
     <scm>
         <connection>scm:git:git@github.com:Jahia/ckeditor.git</connection>
         <url>scm:git:git@github.com:Jahia/ckeditor.git</url>
