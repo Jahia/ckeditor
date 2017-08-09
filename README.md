@@ -9,4 +9,4 @@ See META-INF/LICENSE.txt file
 
 Requirements
 ------------
-Module is targeted to be deployed to Digital Experience Manager version 7.0.0.1 or later.
+Module is targeted to be deployed to Digital Experience Manager version 7.0.0.2 or later.
