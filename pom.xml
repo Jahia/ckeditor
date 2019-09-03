@@ -77,14 +77,6 @@
         </repository>
     </repositories>
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources/javascript</directory>
-                <excludes>
-                    <exclude>CHANGES.md</exclude>
-                </excludes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
