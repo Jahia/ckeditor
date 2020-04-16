@@ -7,7 +7,7 @@
 
                                     http://www.jahia.com
 
-        Copyright (C) 2002-2019 Jahia Solutions Group SA. All rights reserved.
+        Copyright (C) 2002-2020 Jahia Solutions Group SA. All rights reserved.
 
         THIS FILE IS AVAILABLE UNDER TWO DIFFERENT LICENSES:
         1/GPL OR 2/JSEL
@@ -28,7 +28,7 @@
         GNU General Public License for more details.
 
         You should have received a copy of the GNU General Public License
-        along with this program. If not, see <http://www.gnu.org/licenses />.
+        along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
         2/ JSEL - Commercial and Supported Versions of the program
@@ -49,11 +49,11 @@
     <parent>
         <artifactId>jahia-modules</artifactId>
         <groupId>org.jahia.modules</groupId>
-        <version>7.0.0.2</version>
+        <version>7.5.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>ckeditor</artifactId>
     <name>Jahia CKEditor</name>
-    <version>4.7.1-jahia5-SNAPSHOT</version>
+    <version>4.7.1-jahia8-1-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <description>CKEditor module for the Digital Experience Manager platform that provides feature-rich WYSIWYG editor for content authoring.</description>
     <scm>
@@ -61,7 +61,10 @@
         <url>scm:git:git@github.com:Jahia/ckeditor.git</url>
         <developerConnection>scm:git:git@github.com:Jahia/ckeditor.git</developerConnection>
       <tag>HEAD</tag>
-  </scm>
+    </scm>
+    <properties>
+        <jahia-module-signature>MCwCFDrA4o5lw5vVaq4wGf+UFfkH7OXlAhRVMxfQsnUb39TZ0VEsNFd7r5kNbw==</jahia-module-signature>
+    </properties>
     <repositories>
         <repository>
             <id>jahia-public</id>
