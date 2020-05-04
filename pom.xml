@@ -28,7 +28,7 @@
         GNU General Public License for more details.
 
         You should have received a copy of the GNU General Public License
-        along with this program. If not, see <http://www.gnu.org/licenses/>.
+        along with this program. If not, see <http://www.gnu.org/licenses />.
 
 
         2/ JSEL - Commercial and Supported Versions of the program
@@ -49,18 +49,18 @@
     <parent>
         <artifactId>jahia-modules</artifactId>
         <groupId>org.jahia.modules</groupId>
-        <version>8.0.0.0-SNAPSHOT</version>
+        <version>8.0.0.0</version>
     </parent>
     <artifactId>ckeditor</artifactId>
     <name>Jahia CKEditor</name>
-    <version>4.13.1-jahia8-1-SNAPSHOT</version>
+    <version>4.13.1-jahia8-1</version>
     <packaging>bundle</packaging>
     <description>CKEditor module for the Digital Experience Manager platform that provides feature-rich WYSIWYG editor for content authoring.</description>
     <scm>
         <connection>scm:git:git@github.com:Jahia/ckeditor.git</connection>
         <url>scm:git:git@github.com:Jahia/ckeditor.git</url>
         <developerConnection>scm:git:git@github.com:Jahia/ckeditor.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>4_13_1_jahia8_1</tag>
     </scm>
     <properties>
         <jahia-module-signature>MCwCFCureWQEPRJYoqhmrBARuSgNXfJiAhQXELa4l2nDtgIbPxWiNE6c4ue5fA==</jahia-module-signature>
