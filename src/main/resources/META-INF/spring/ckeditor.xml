@@ -7,7 +7,7 @@
     <bean class="org.jahia.ajax.gwt.helper.ModuleGWTResources">
         <property name="javascriptResources">
             <list>
-                <value>/modules/ckeditor/javascript/jquery-3.5.1.min.js</value>
+                <value>/modules/jquery/javascript/jquery-3.4.1.min.js</value>
             </list>
         </property>
     </bean>
