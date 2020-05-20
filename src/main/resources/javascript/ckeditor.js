@@ -2,11 +2,6 @@
 Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
-// TODO THIS IS SPIKE code it should not stay here
-// TODO 1: redo jquery loading, currently loaded using document.write, it should be replace by a static load
-// TODO 1: I think it's ok to load jQuery into jahia-root, as it is required for CKEditor A11ychecker to work.
-document.write('<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"><\/script>');
-
 // TODO 2: Anthracite code is doing this some hardcoded styling on .cke class that impact the A11ychecker panels, so we need to fix css later
 // TODO 2: for now I just add a hack here
 document.write('<style>' +
