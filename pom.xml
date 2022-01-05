@@ -53,7 +53,7 @@
     </parent>
     <artifactId>ckeditor</artifactId>
     <name>Jahia CKEditor</name>
-    <version>4.13.1-jahia8-3-SNAPSHOT</version>
+    <version>4.17.1-jahia8-3-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <description>CKEditor module for the Digital Experience Manager platform that provides feature-rich WYSIWYG editor for content authoring.</description>
     <scm>
@@ -65,7 +65,7 @@
     <properties>
         <jahia-module-type>system</jahia-module-type>
         <require-capability>osgi.extender;filter:="(osgi.extender=org.jahia.bundles.blueprint.extender.config)"</require-capability>
-        <jahia-module-signature>MCwCFCureWQEPRJYoqhmrBARuSgNXfJiAhQXELa4l2nDtgIbPxWiNE6c4ue5fA==</jahia-module-signature>
+        <jahia-module-signature>MCwCFHTVFqUzFPE2SsBvdHLGRwoGROCLAhQfeWS6HFemLJaZHJCWZA7lT5Db5Q==</jahia-module-signature>
     </properties>
     <repositories>
         <repository>
