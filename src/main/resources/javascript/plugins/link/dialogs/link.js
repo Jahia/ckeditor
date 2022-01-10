@@ -1,6 +1,6 @@
 ﻿/*
-Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+ Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
+ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 (function(){function t(){var d=this.getDialog(),p=d._.editor,n=p.config.linkPhoneRegExp,q=p.config.linkPhoneMsg,p=CKEDITOR.dialog.validate.notEmpty(p.lang.link.noTel).apply(this);if(!d.getContentElement("info","linkType")||"tel"!=d.getValueOf("info","linkType"))return!0;if(!0!==p)return p;if(n)return CKEDITOR.dialog.validate.regex(n,q).call(this)}CKEDITOR.dialog.add("link",function(d){function p(a,b){var d=a.createRange();d.setStartBefore(b);d.setEndAfter(b);return d}var n=CKEDITOR.plugins.link,q,
 r=function(){var a=this.getDialog(),b=a.getContentElement("target","popupFeatures"),a=a.getContentElement("target","linkTargetName"),c=this.getValue();if(b&&a)switch(b=b.getElement(),b.hide(),a.setValue(""),c){case "frame":a.setLabel(d.lang.link.targetFrameName);a.getElement().show();break;case "popup":b.show();a.setLabel(d.lang.link.targetPopupName);a.getElement().show();break;default:a.setValue(c),a.getElement().hide()}},e=function(a){a.target&&this.setValue(a.target[this.id]||"")},g=function(a){a.advanced&&
