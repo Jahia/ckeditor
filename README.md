@@ -6,6 +6,8 @@ CKEditor
 ======================
 This is a custom module for the Digital Experience Manager platform that provides feature-rich WYSIWYG editor for content authoring.
 
+`DO NOT MAKE CHANGES IN THIS MODULE! Use ckeditor-dev instead then copy artifacts here.
+`
 ## Open-Source
 
 This is an Open-Source module, you can find more details about Open-Source @ Jahia [in this repository](https://github.com/Jahia/open-source).
