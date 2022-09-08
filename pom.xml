@@ -33,7 +33,7 @@
     </parent>
     <artifactId>ckeditor</artifactId>
     <name>Jahia CKEditor</name>
-    <version>4.17.1-jahia8-3-SNAPSHOT</version>
+    <version>4.19.1-jahia8-2-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <description>CKEditor module for the Digital Experience Manager platform that provides feature-rich WYSIWYG editor for content authoring.</description>
     <scm>
