@@ -4,6 +4,5 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	config.config.disableNativeSpellChecker = false;
 };
 
