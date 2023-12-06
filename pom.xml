@@ -33,14 +33,14 @@
     </parent>
     <artifactId>ckeditor</artifactId>
     <name>Jahia CKEditor</name>
-    <version>4.21.0-jahia8-6-SNAPSHOT</version>
+    <version>4.21.0</version>
     <packaging>bundle</packaging>
     <description>CKEditor module for the Digital Experience Manager platform that provides feature-rich WYSIWYG editor for content authoring.</description>
     <scm>
         <connection>scm:git:git@github.com:Jahia/ckeditor.git</connection>
         <url>scm:git:git@github.com:Jahia/ckeditor.git</url>
         <developerConnection>scm:git:git@github.com:Jahia/ckeditor.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>4.21.0-jahia8-6</tag>
     </scm>
     <properties>
         <jahia-module-type>system</jahia-module-type>
