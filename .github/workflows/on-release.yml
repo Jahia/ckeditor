@@ -33,14 +33,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY_JAHIACI }}
 
-      - name: Delete github tag ${{ github.event.release.tag_name }}
+      - name: Setup git
         shell: bash
         run: |
           git config user.email 'jahia-ci@jahia.com'
           git config user.name 'Jahia CI'
-          git fetch --all
-          git tag --delete ${{ github.event.release.tag_name }}
-          git push origin :refs/tags/${{ github.event.release.tag_name }}
         
       - name: Set environment variables from parameters
         shell: bash
