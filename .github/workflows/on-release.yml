@@ -33,16 +33,15 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY_JAHIACI }}
 
-      - uses: jahia/jahia-modules-action/release@v2
-        name: Release Module
-        with:
-          github_slug: Jahia/ckeditor
-          primary_release_branch: master
-          release_id: ${{ github.event.release.id }}
-          release_version: ${{ github.event.release.tag_name }}
-          github_api_token: ${{ secrets.GH_API_TOKEN }}
-          nexus_username: ${{ secrets.NEXUS_USERNAME }}
-          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+      - name: Release with Maven
+        run: |
+          TAG_VERSION=$(echo ${{ github.event.release.tag_name }}) # e.g. 4.21.0-jahia8-6
+          FINAL_RELEASE_VERSION=$(echo ${{ tag_name }} | tr '_' '.')
+          REVISION=$(echo $FINAL_RELEASE_VERSION | tr -d 'jahia' | cut -d'-' -f3)
+          NEXT_REVISION=$(expr $REVISION + 1)
+          NEXT_DEVELOPMENT_VERSION="$(echo $FINAL_RELEASE_VERSION | cut -d'-' -f1)-jahia8-${NEXT_REVISION}"-SNAPSHOT # e.g. 4.21.0-jahia8-7-SNAPSHOT
+          mvn -ntp -B -s .github/maven.settings.xml -DdryRun=false -Dtag=$TAG_VERSION -DreleaseVersion=$FINAL_RELEASE_VERSION -DdevelopmentVersion="$NEXT_DEVELOPMENT_VERSION" -DscmCommentPrefix="[skip ci] [maven-release-plugin] " release:prepare
+          mvn -ntp -B -s .github/maven.settings.xml -DdryRun=false release:perform -Prelease-to-staging-repository
 
       - uses: jahia/jahia-modules-action/update-signature@v2
         with:
@@ -50,14 +49,6 @@ jobs:
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
           nexus_enterprise_releases_url: ${{ secrets.NEXUS_ENTERPRISE_RELEASES_URL }}
           force_signature: true
-
-      - uses: jahia/jahia-modules-action/release-publication@v2
-        name: Publish Module
-        with:
-          module_id: ckeditor
-          release_version: ${{ github.event.release.tag_name }}
-          nexus_username: ${{ secrets.NEXUS_USERNAME }}
-          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
 
       # Tmate only starts if any of the previous steps fails.
       # Be careful since it also means that if a step fails the workflow will
