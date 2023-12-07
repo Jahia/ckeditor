@@ -36,7 +36,7 @@ jobs:
       - name: Release with Maven
         run: |
           TAG_VERSION=$(echo ${{ github.event.release.tag_name }}) # e.g. 4.21.0-jahia8-6
-          FINAL_RELEASE_VERSION=$(echo ${{ tag_name }} | tr '_' '.')
+          FINAL_RELEASE_VERSION=$(echo ${{ github.event.release.tag_name }} | tr '_' '.')
           REVISION=$(echo $FINAL_RELEASE_VERSION | tr -d 'jahia' | cut -d'-' -f3)
           NEXT_REVISION=$(expr $REVISION + 1)
           NEXT_DEVELOPMENT_VERSION="$(echo $FINAL_RELEASE_VERSION | cut -d'-' -f1)-jahia8-${NEXT_REVISION}"-SNAPSHOT # e.g. 4.21.0-jahia8-7-SNAPSHOT
