@@ -15,7 +15,7 @@ jobs:
     # downloading the entire world when building.
     # More on https://github.com/Jahia/cimg-mvn-cache
     container:
-      image: jahia/cimg-mvn-cache:ga_cimg_openjdk_8.0.312-node
+      image: jahia/cimg-mvn-cache:ga_cimg_openjdk_11.0.20-node
       credentials:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -33,6 +33,15 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY_JAHIACI }}
 
+      - name: Delete github tag ${{ github.event.release.tag_name }}
+        shell: bash
+        run: |
+          git config user.email 'jahia-ci@jahia.com'
+          git config user.name 'Jahia CI'
+          git fetch --all
+          git tag --delete ${{ github.event.release.tag_name }}
+          git push origin :refs/tags/${{ github.event.release.tag_name }}
+        
       - name: Set environment variables from parameters
         shell: bash
         run: |
