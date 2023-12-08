@@ -37,21 +37,21 @@ jobs:
         shell: bash
         run: |
           git fetch --all
-          git pull origin ${{ inputs.primary_release_branch }} --quiet
+          git pull origin master --quiet
   
       - name: Delete github tag ${{ inputs.release_version }}
         shell: bash
         run: |
-          git config user.email ${{ inputs.git_user_email }}
-          git config user.name ${{ inputs.git_user_name }}
-          git tag --delete ${{ inputs.release_version }}
-          git push origin :refs/tags/${{ inputs.release_version }}
+          git config user.email "jahia-ci@jahia.com"
+          git config user.name "Jahia CI"
+          git tag --delete ${{ github.event.release.tag_name }}
+          git push origin :refs/tags/${{ github.event.release.tag_name }}
   
       - name: Remove any previous changes, this is required by mvn release prepare
         shell: bash
         run: |
           git reset --hard
-          git checkout ${{ inputs.primary_release_branch }}
+          git checkout master
   
       - name: Added some debug details
         shell: bash
