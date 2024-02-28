@@ -46,6 +46,7 @@
         <jahia-module-type>system</jahia-module-type>
         <require-capability>osgi.extender;filter:="(osgi.extender=org.jahia.bundles.blueprint.extender.config)"</require-capability>
         <jahia-module-signature>MCwCFGV751JV2Lte5yEMxaMFdC9bm9k7AhQ8FNKnIBxDMklLe3HrPbYyPeID+A==</jahia-module-signature>
+        <jahia.plugin.version>6.9</jahia.plugin.version>
     </properties>
     <repositories>
         <repository>
