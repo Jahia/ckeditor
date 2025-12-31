@@ -6,6 +6,10 @@ import org.osgi.service.component.annotations.Component;
 
 import java.util.List;
 
+/**
+ * GWT resources for CKEditor module
+ * Some CKEditor plugins depend on jQuery, so we need to include it
+ */
 @Component(service = ModuleGWTResources.class, immediate = true)
 public class CkeditorGWTResources extends ModuleGWTResources {
 
