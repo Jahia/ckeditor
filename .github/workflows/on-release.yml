@@ -7,8 +7,101 @@ on:
     types: [prereleased]
 
 jobs:
-  release-module:
-    uses: Jahia/jahia-modules-action/.github/workflows/reusable-release-module.yml@v2
-    secrets: inherit 
-    with:
-      primary_release_branch: "master"
+  # Note that we cannot yet use the reusable release workflow 
+  # as it does handle the specific versioning of this project.
+  on-release:
+    runs-on: ubuntu-latest
+
+    # The cimg-mvn-cache is an image containing a .m2 folder warmed-up
+    # with common Jahia dependencies. Using this prevents maven from
+    # downloading the entire world when building.
+    # More on https://github.com/Jahia/cimg-mvn-cache
+    container:
+      image: ghcr.io/jahia/jahia-docker-mvn-cache:11-jdk-noble-mvn-loaded
+      credentials:
+        username: ${{ secrets.GH_PACKAGES_USERNAME }}
+        password: ${{ secrets.GH_PACKAGES_TOKEN }}
+
+    steps:
+      # Providing the SSH PRIVATE of a user part of an admin group
+      # is necessary to bypass PR checks
+      - uses: actions/checkout@v4
+        with:
+          ssh-key: ${{ secrets.GH_SSH_PRIVATE_KEY_JAHIACI }}
+
+      # Setting up the SSH agent to be able to commit back to the repository
+      # https://github.com/webfactory/ssh-agent
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY_JAHIACI }}
+
+      - name: Getting latest changes from the remote branch
+        shell: bash
+        run: |
+          git fetch --all
+          git pull origin master --quiet
+  
+      - name: Delete github tag ${{ inputs.release_version }}
+        shell: bash
+        run: |
+          git config user.email "jahia-ci@jahia.com"
+          git config user.name "Jahia CI"
+          git tag --delete ${{ github.event.release.tag_name }}
+          git push origin :refs/tags/${{ github.event.release.tag_name }}
+  
+      - name: Remove any previous changes, this is required by mvn release prepare
+        shell: bash
+        run: |
+          git reset --hard
+          git checkout master
+  
+      - name: Added some debug details
+        shell: bash
+        run: |
+          git branch
+          echo "---"
+          git status
+          echo "---"
+          git show --summary
+        
+      - name: Set environment variables from parameters
+        shell: bash
+        run: |
+          echo "NEXUS_USERNAME=${{ secrets.NEXUS_USERNAME }}" >> $GITHUB_ENV
+          echo "NEXUS_PASSWORD=${{ secrets.NEXUS_PASSWORD }}" >> $GITHUB_ENV
+
+      - name: Release with Maven
+        run: |
+          TAG_VERSION=$(echo ${{ github.event.release.tag_name }}) # e.g. 4.21.0-jahia8-6
+          FINAL_RELEASE_VERSION=$(echo ${{ github.event.release.tag_name }} | tr '_' '.')
+          REVISION=$(echo $FINAL_RELEASE_VERSION | tr -d 'jahia' | cut -d'-' -f3)
+          NEXT_REVISION=$(expr $REVISION + 1)
+          NEXT_DEVELOPMENT_VERSION="$(echo $FINAL_RELEASE_VERSION | cut -d'-' -f1)-jahia8-${NEXT_REVISION}"-SNAPSHOT # e.g. 4.21.0-jahia8-7-SNAPSHOT
+          mvn -ntp -B -s .github/maven.settings.xml -DdryRun=false -Dtag=$TAG_VERSION -DreleaseVersion=$FINAL_RELEASE_VERSION -DdevelopmentVersion="$NEXT_DEVELOPMENT_VERSION" -DscmCommentPrefix="[skip ci] [maven-release-plugin] " release:prepare
+          mvn -ntp -B -s .github/maven.settings.xml -DdryRun=false release:perform -Prelease-to-staging-repository
+
+      - uses: jahia/jahia-modules-action/update-signature@v2
+        with:
+          nexus_username: ${{ secrets.NEXUS_USERNAME }}
+          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+          nexus_enterprise_releases_url: ${{ secrets.NEXUS_ENTERPRISE_RELEASES_URL }}
+          force_signature: true
+
+      # Tmate only starts if any of the previous steps fails.
+      # Be careful since it also means that if a step fails the workflow will
+      # keep running until it reaches the timeout
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 15
+
+  sbom:
+    name: SBOM processing
+    needs: on-release
+    runs-on: ubuntu-latest
+    container:
+      image: cyclonedx/cyclonedx-cli:0.24.2   
+    steps:
+      - uses: jahia/jahia-modules-action/sbom-processing@v2
+        with:
+          dependencytrack_hostname: ${{ vars.DEPENDENCYTRACK_HOSTNAME }}
