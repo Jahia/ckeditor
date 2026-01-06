@@ -8,7 +8,7 @@ on:
 
 jobs:
   # Note that we cannot yet use the reusable release workflow 
-  # as it does handle the specific versioning of this project.
+  # as it does not handle the specific versioning of this project.
   on-release:
     runs-on: ubuntu-latest
 
