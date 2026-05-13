@@ -39,7 +39,7 @@ jobs:
         shell: bash
         run: |
           git fetch --all
-          git pull origin master --quiet
+          git pull origin main --quiet
   
       - name: Delete github tag ${{ inputs.release_version }}
         shell: bash
@@ -53,7 +53,7 @@ jobs:
         shell: bash
         run: |
           git reset --hard
-          git checkout master
+          git checkout main
   
       - name: Added some debug details
         shell: bash
@@ -84,7 +84,6 @@ jobs:
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
-          nexus_enterprise_releases_url: ${{ secrets.NEXUS_ENTERPRISE_RELEASES_URL }}
           force_signature: true
 
       # Tmate only starts if any of the previous steps fails.

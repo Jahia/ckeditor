@@ -1,12 +1,12 @@
 # This workflow is triggered every time a change is pushed to any branches
 # Github actions command reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
-name: On merge to master
+name: On merge to main
 
 # The workflow could also be triggered on PRs
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
     tags-ignore:
       - '**'
 
@@ -20,7 +20,6 @@ jobs:
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
-          nexus_enterprise_releases_url: ${{ secrets.NEXUS_ENTERPRISE_RELEASES_URL }}
 
   build:
     name: Build Module
@@ -37,8 +36,6 @@ jobs:
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
-          module_id: ckeditor
-          nexus_internal_url: https://devtools.jahia.com/nexus/content/groups/internal/
           
   sbom:
     name: SBOM processing
@@ -56,7 +53,7 @@ jobs:
   publish:
     name: Publish module
     needs: [build]
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/jahia/jahia-docker-mvn-cache:11-jdk-noble-mvn-loaded
@@ -69,4 +66,3 @@ jobs:
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
-          nexus_internal_url: https://devtools.jahia.com/nexus/content/groups/internal/
